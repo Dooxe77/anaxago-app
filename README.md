@@ -6,13 +6,15 @@ Anaxago test:
 
 > Rien empêchait l'utilisation de Vue 3 mais comme le projet est en V2 je suis volontairement parti sur cette version.
 
-> De même pour babel, eslint, webpack, je ne m'attarde pas sur la conf de ce projet.
+> De même pour babel, eslint, webpack, je ne m'attarde pas sur la conf de ce projet (ajout d'alias également).
 
 > Utilisation de la lib. Vuetify pour coller au plus à l'app actuelle.
 
 > Style en scss.
 
-> Avec plus de temps j'aurai ajouté des tests via cypress ou encore une partie storybook pour le testing de composant génériques (dossier shared)
+> Avec plus de temps j'aurai ajouté des tests via cypress ou encore une partie storybook pour le testing de composant génériques (dossier shared) et ajouté typescript pour le typage des données
+
+> Au niveau des convention comme c'est très variable d'un projet à l'autre, j'ai utilisé celle mise en place sur mon dernier projet.
 
 Questions :
 
@@ -33,3 +35,6 @@ npm run serve
 #Lien de test: http://localhost:8080/
 
 ```
+
+Todo:
+clean // TEMP

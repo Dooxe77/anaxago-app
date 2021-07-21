@@ -1,22 +1,28 @@
 <template>
-  <div class="message">
-    <h1>{{ msg }}</h1>
+  <div class="home">
+    <Product-container />
   </div>
 </template>
 
 <script>
+import ProductContainer from '../productContainer/ProductContainer';
+
 export default {
   name: 'Home',
+  components: {
+    ProductContainer,
+  },
   data() {
     return {
-      msg: 'Welcome to my new app',
+
     };
   },
 }
 </script>
 
-<style scoped>
-  .message {
-    font-weight: bold;
+<style lang="scss">
+  .home {
+    display: flex;
+    justify-content: center;
   }
 </style>

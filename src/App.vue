@@ -19,10 +19,8 @@ export default {
 </script>
 
 <style lang="scss">
-
-#app {
-  body {
-    margin: 0;
-  }
+body {
+  margin: 0;
 }
+
 </style>

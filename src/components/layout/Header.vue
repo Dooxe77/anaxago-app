@@ -10,6 +10,7 @@
 </template>
 
 <script>
+
 export default {
   name: 'Header',
   data() {
@@ -17,7 +18,8 @@ export default {
       logoUrl: 'https://www.anaxago.com/assets/images/logo_anaxago_blue.ceff523e.svg',
     };
   },
-}
+};
+
 </script>
 
 <style lang="scss">
