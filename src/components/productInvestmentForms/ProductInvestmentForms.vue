@@ -30,33 +30,38 @@
       </v-stepper-content>
   
       <v-stepper-step 
-        :complete="currentStep > 3" 
+        :complete="currentStep > 3"
         :editable="isValidFirstStep && isValidSecondStep"
         step="3">
-        Signature
-      </v-stepper-step>
-      <v-stepper-content step="3">
-        <Signature-step />
-        <Step-form-buttons @validate="changeCurrentStep(4)" @cancel="closeForm" />
-      </v-stepper-content>
-  
-      <v-stepper-step 
-        :complete="currentStep > 4"
-        :editable="isValidFirstStep && isValidSecondStep && isValidThirdStep"
-        step="4">
         Moyen de paiement
       </v-stepper-step>
-      <v-stepper-content step="4">
-        <Payment-method-step />
-        <Step-form-buttons @validate="changeCurrentStep(5)" @cancel="closeForm" />
+      <v-stepper-content step="3">
+        <Payment-method-step @update-selected-payment-method="updateSelectedPaymentMethod"/>
+        <Step-form-buttons 
+          :is-disabled-validate-button="isDisabledValidateButtonPaymentMethodStep"
+          @validate="changeCurrentStep(4)" 
+          @cancel="closeForm" />
       </v-stepper-content>
 
-      <v-stepper-step :editable="isValidFirstStep && isValidSecondStep && isValidThirdStep && isValidFourthStep" step="5">
-        Résumé
+      <v-stepper-step :editable="isValidFirstStep && isValidSecondStep" step="4">
+        Validation finale
       </v-stepper-step>
-      <v-stepper-content step="5">
+      <v-stepper-content step="4">
         <Summary-step :investment-data="investmentData"/>
+        <Text-input 
+          v-if="showValidationInput"
+          label="Code reçu par sms"
+          v-model="phoneMessageCode"
+        />
         <Button 
+          v-if="showValidationInput"
+          class="confirm-form-button" 
+          isSmall 
+          @click="validateInvestment">
+          Valider l'investissement
+        </Button>
+        <Button 
+          v-else-if="!showValidationInput"
           class="validate-form-button" 
           isSmall 
           @click="finishProcess">
@@ -76,9 +81,16 @@
       bottom
       color="primary"
       text
-      :timeout="-1"
       :value="showToast">
-      Investissement effectué avec succès.
+      Envoi du code de validation effectué avec succès.
+    </v-snackbar>
+    <v-snackbar
+      absolute
+      bottom
+      color="green"
+      text
+      :value="showProcessToast">
+      Processus terminé
     </v-snackbar>
   </div>
 </template>
@@ -90,8 +102,8 @@ import StepFormButtons from './stepFormButtons/StepFormButtons';
 import AmountInvestmentStep from './steps/AmountInvestmentStep';
 import InvestmentAccountStep from './steps/InvestmentAccountStep';
 import PaymentMethodStep from './steps/PaymentMethodStep';
-import SignatureStep from './steps/SignatureStep';
 import SummaryStep from './steps/SummaryStep';
+import TextInput from '../shared/TextInput';
 
 export default {
   name: 'ProductInvestmentForms',
@@ -99,7 +111,11 @@ export default {
     return {
       currentStep: 1,
       amount: "",
+      paymentMethod: "",
       showToast: false,
+      showProcessToast: false,
+      showValidationInput: false,
+      phoneMessageCode: "543-380",
     }
   },
   components: {
@@ -107,9 +123,9 @@ export default {
     AmountInvestmentStep,
     InvestmentAccountStep,
     PaymentMethodStep,
-    SignatureStep,
     StepFormButtons,
     SummaryStep,
+    TextInput,
     VStepperContent, 
     VStepper, 
     VStepperStep,
@@ -124,16 +140,17 @@ export default {
     isValidThirdStep() {
       return false;
     },
-    isValidFourthStep() {
-      return false;
-    },
     isDisabledValidateButtonAmountStep() {
       const parsedAmount = parseInt(this.amount);
       return isNaN(parsedAmount) ? true : parsedAmount < 1000;
     },
+    isDisabledValidateButtonPaymentMethodStep() {
+      return !this.paymentMethod;
+    },
     investmentData() {
       return {
         amount: this.amount,
+        paymentMethod: this.paymentMethod,
       }
     },
   },
@@ -145,13 +162,29 @@ export default {
       this.$emit('close-product-forms');
     },
     finishProcess() {
-      this.showToast = true;
+      setTimeout(() => { 
+        this.showToast = true;
+        this.showValidationInput = true;
+      }, 1000);
+
       setTimeout(() => { 
         this.showToast = false;
-      }, 8000);
+      }, 10000);
     },
     updateAmount(value) {
       this.amount = value;
+    },
+    updateSelectedPaymentMethod(value) {
+      this.paymentMethod = value;
+    },
+    validateInvestment() {
+      setTimeout(() => { 
+        this.showProcessToast = true;
+      }, 1000);
+
+      setTimeout(() => { 
+        this.showProcessToast = false;
+      }, 10000);
     },
   }
 }
@@ -162,7 +195,7 @@ export default {
   .product-investment-forms {
     width: 50%;
 
-    .validate-form-button{
+    .validate-form-button, .confirm-form-button{
       margin-right: $spacing-sm;
     }
   }
