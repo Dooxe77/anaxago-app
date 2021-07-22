@@ -2,7 +2,6 @@
   <header class="header">
     <img 
       :src="logoUrl" 
-      class="logo"
       alt="logo Anaxago" 
       width="130" 
       height="18">
@@ -29,8 +28,8 @@ export default {
     display: flex;
     align-items: center;
     height: 80px;
-    color: $blue-dark-color;
-    border-bottom: 1px solid $grey-light-color;
+    color: $shark-color;
+    border-bottom: 1px solid $athens-gray-color;
     margin: 0 $spacing-lg;
   }
 </style>

@@ -1,10 +1,8 @@
 <template>
   <div class="product-container">
-    <Panel class="product-infos-content">
-      <product-infos />
-    </Panel>
+    <product-infos :product-infos="productInfos" class="product-infos-content"/>
     <Panel class="product-side-panel-content">
-      <product-side-panel />
+      <product-side-panel :product-status="productStatus"/>
     </Panel>
   </div>
 </template>
@@ -20,6 +18,31 @@ export default {
     Panel,
     ProductInfos,
     ProductSidePanel,
+  },
+  props: {
+    product: {
+      type: Object,
+      required: true,
+    }
+  },
+  computed: {
+    productInfos() {
+      return {
+        "name": this.product.name,
+        "description": this.product.description,
+        "type": this.product.type,
+        "distribution": this.product.distribution,
+        "horizon": this.product.horizon,
+        "emittedInstrument": this.product.emittedInstrument,
+        "imgUrl": this.product.imgUrl,
+      }
+    },
+    productStatus() {
+      return {
+        "targetAmount": this.product.targetAmount,
+        "currentAmount": this.product.currentAmount,
+      }
+    },
   }
 }
 </script>

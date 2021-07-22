@@ -1,6 +1,6 @@
 <template>
   <div class="product-side-panel">
-    <Product-status />
+    <Product-status :product-status="productStatus"/>
     <Panel>
       <Product-actions />
     </Panel>
@@ -18,7 +18,13 @@ export default {
     Panel,
     ProductActions,
     ProductStatus
-  }
+  }, 
+  props: {
+    productStatus: {
+      type: Object,
+      required: true,
+    }
+  },
 }
 </script>
 

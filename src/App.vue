@@ -21,6 +21,8 @@ export default {
 <style lang="scss">
 body {
   margin: 0;
+  font-family: ProximaNova,Arial,sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
 </style>

@@ -7,6 +7,15 @@
 <script>
 export default {
   name: 'ProductStatus',
+  props: {
+    productStatus: {
+      type: Object,
+      required: true,
+    }
+  },
+  computed: {
+    
+  }
 }
 </script>
 
