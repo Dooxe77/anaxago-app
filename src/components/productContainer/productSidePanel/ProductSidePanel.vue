@@ -1,26 +1,37 @@
 <template>
   <div class="product-side-panel">
-    <Product-status :product-status="productStatus"/>
-    <Panel>
+    <Panel class="product-status-panel">
+      <Product-status :product-status="productStatus"/>
+    </Panel>
+    <Panel class="product-actions-panel">
       <Product-actions />
+    </Panel>
+    <Panel class="product-contact-panel">
+      <Contact-infos :product-contact="productContact"/>
     </Panel>
   </div>
 </template>
 
 <script>
-import Panel from '../../shared/Panel';
-import ProductActions from './productActions/ProductActions';
+import Panel from "../../shared/Panel";
 import ProductStatus from './productStatus/ProductStatus';
+import ContactInfos from "./contactInfos/ContactInfos";
+import ProductActions from "./productActions/ProductActions";
 
 export default {
   name: 'ProductSidePanel',
   components: {
+    ContactInfos,
     Panel,
     ProductActions,
     ProductStatus
   }, 
   props: {
     productStatus: {
+      type: Object,
+      required: true,
+    },
+     productContact: {
       type: Object,
       required: true,
     }
@@ -35,5 +46,14 @@ export default {
     height: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+
+    .product-status-panel {
+      margin-bottom: 30px;
+    }
+
+    .product-actions-panel {
+      margin-bottom: 30px;
+    }
   }
 </style>

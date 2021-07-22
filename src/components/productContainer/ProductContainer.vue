@@ -1,21 +1,20 @@
 <template>
   <div class="product-container">
     <product-infos :product-infos="productInfos" class="product-infos-content"/>
-    <Panel class="product-side-panel-content">
-      <product-side-panel :product-status="productStatus"/>
-    </Panel>
+    <product-side-panel 
+      :product-status="productStatus" 
+      :product-contact="productContact"
+      class="product-side-panel-content"/>
   </div>
 </template>
 
 <script>
-import Panel from '../shared/Panel';
 import ProductInfos from './productInfos/ProductInfos';
 import ProductSidePanel from './productSidePanel/ProductSidePanel';
 
 export default {
   name: 'ProductContainer',
   components: {
-    Panel,
     ProductInfos,
     ProductSidePanel,
   },
@@ -43,6 +42,9 @@ export default {
         "currentAmount": this.product.currentAmount,
       }
     },
+    productContact() {
+      return this.product.contactInfos;
+    },
   }
 }
 </script>
@@ -51,17 +53,23 @@ export default {
 @import "../../styles/variables.scss";
 
   .product-container {
-    // TEMP
     min-height: 600px;
-
     max-width: 1080px;
-    margin-top: 50px;
+    margin: 50px 0;
     display: flex;
     flex: 1;
 
+    @media (max-width: $tablet-breakpoint) {
+      flex-direction: column;
+      margin: 50px;
+    }
+
     .product-infos-content{
       flex: 3;
-      margin-right: $spacing-lg;
+
+      @media (min-width: $tablet-breakpoint) {
+        margin-right: $spacing-lg;
+      }
     }
 
     .product-side-panel-content {

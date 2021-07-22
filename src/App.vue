@@ -19,6 +19,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import "./styles/index.scss";
+
 body {
   margin: 0;
   font-family: ProximaNova,Arial,sans-serif;

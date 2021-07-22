@@ -1,10 +1,13 @@
 // COLORS
 $nile-blue-color: #184256;
-$oxford-blue: #2e3e48;
+$oxford-blue-color: #2e3e48;
 $shark-color: #1d2124;
 $athens-gray-color: #e8ebef;
 $cutty-sark-color: #5b7b80;
+$firefly-color: #0a1f2b;
+
 // SPACING
+$spacing-sm: 5px;
 $spacing-md: 10px;
 $spacing-lg: 15px;
 
@@ -12,4 +15,8 @@ $spacing-lg: 15px;
 $radius-sm: 4px;
 
 // FONT
+$font-size-text-md: 14px;
 $font-size-text: 16px;
+
+// BREAKPOINT
+$tablet-breakpoint: 1264px;

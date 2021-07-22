@@ -36,8 +36,7 @@
     <img 
       :src="productInfos.imgUrl"
       alt="Product image" 
-      width="800" 
-      height="440">
+      class="product-image">
       <span class="product-description">
         {{productInfos.description}}
       </span>
@@ -61,6 +60,12 @@ export default {
 
   .product-infos {
     height: 100%;
+    
+    @media (max-width: $tablet-breakpoint) {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
     .product-type {
       font-weight: 600;
@@ -78,6 +83,11 @@ export default {
 
     .product-details-container {
       display: flex;
+
+      @media (max-width: $tablet-breakpoint) {
+        flex-direction: column;
+        text-align: left;
+      }
 
       .product-key-value-infos {
         display: flex;
@@ -104,10 +114,20 @@ export default {
       }
     }
 
+    .product-image {
+      width: 800px; 
+      height: 440px;
+
+      @media (max-width: $tablet-breakpoint) {
+        width: 600px; 
+        height: 330px;
+      }
+    }
+
     .product-description {
       font-size: $font-size-text;
       line-height: 2;
-      color: $oxford-blue;
+      color: $oxford-blue-color;
     }
   }
 </style>
