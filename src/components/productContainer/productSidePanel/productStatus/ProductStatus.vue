@@ -8,22 +8,13 @@
       <span class="product-amount-label">Montant actuel</span>
       <span class="product-amount-value">{{ currentAmount }} €</span>
     </div>
-    <v-progress-circular
-      :rotate="-90"
-      :size="100"
-      :width="15"
-      :value="productStatusPercent"
-      color="primary"
-      class="progress-circular-amount"
-      >
-      <!-- // TEMP: Color primary not working -->
-        {{ productStatusPercent }}%
-      </v-progress-circular>
+    <Progress-circular :value="productStatusPercent"/>
   </div>
 </template>
 
 <script>
-import { VProgressCircular } from 'vuetify/lib';
+import ProgressCircular from '../../../shared/ProgressCircular';
+
 export default {
   name: 'ProductStatus',
   props: {
@@ -33,7 +24,7 @@ export default {
     }
   },
   components: {
-    VProgressCircular,
+    ProgressCircular,
   },
   computed: {
     targetAmount() {

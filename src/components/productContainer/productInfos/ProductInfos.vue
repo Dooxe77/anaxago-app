@@ -7,7 +7,6 @@
       {{productInfos.name}}
     </div>
     <div class="product-details-container">
-      <!-- Component shared Key / value text -->
       <div class="product-key-value-infos">
         <span class="key">
           Instrument émis

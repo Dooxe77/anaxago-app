@@ -1,7 +1,7 @@
 <template>
   <div class="product-container">
-    <product-infos :product-infos="productInfos" class="product-infos-content"/>
-    <product-side-panel 
+    <Product-infos :product-infos="productInfos" class="product-infos-content"/>
+    <Product-side-panel 
       :product-status="productStatus" 
       :product-contact="productContact"
       class="product-side-panel-content"/>
