@@ -1,6 +1,8 @@
 <template>
   <div class="product-actions">
-   <Button class="action-button">Investir</Button>
+   <Button class="action-button" @click="openProductForms">
+      Investir
+    </Button>
   </div>
 </template>
 
@@ -12,6 +14,11 @@ export default {
   components: {
     Button,
   }, 
+  methods: {
+    openProductForms() {
+      this.$emit('open-product-forms');
+    }
+  }
 }
 </script>
 
@@ -26,6 +33,8 @@ export default {
     .action-button {
       &.v-btn {
         height: 50px;
+        background-color: $teal-blue-color !important;
+        padding: 20px 35px !important;
       }
     }
   }

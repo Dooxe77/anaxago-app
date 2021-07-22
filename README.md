@@ -14,7 +14,8 @@ Anaxago test:
 
 > Style en scss.
 
-> Avec plus de temps j'aurai ajouté des tests via cypress ou encore une partie storybook pour le testing de composant génériques (dossier shared) et ajouté typescript pour le typage des données
+> Avec plus de temps j'aurai ajouté des tests via cypress ou encore une partie storybook pour le testing de composant génériques (dossier shared) et ajouté typescript pour le typage des données.
+> VueX pour la gestion des datas des forms également
 
 > Au niveau des convention comme c'est très variable d'un projet à l'autre, j'ai utilisé celle mise en place sur mon dernier projet.
 

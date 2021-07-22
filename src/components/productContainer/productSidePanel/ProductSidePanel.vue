@@ -4,7 +4,7 @@
       <Product-status :product-status="productStatus"/>
     </Panel>
     <Panel class="product-actions-panel">
-      <Product-actions />
+      <Product-actions @open-product-forms="openProductForms"/>
     </Panel>
     <Panel class="product-contact-panel">
       <Contact-infos :product-contact="productContact"/>
@@ -36,6 +36,11 @@ export default {
       required: true,
     }
   },
+  methods: {
+    openProductForms() {
+      this.$emit('open-product-forms');
+    }
+  }
 }
 </script>
 

@@ -1,10 +1,13 @@
 <template>
   <div class="product-container">
-    <Product-infos :product-infos="productInfos" class="product-infos-content"/>
+    <Product-infos 
+      class="product-infos-content"
+      :product-infos="productInfos" />
     <Product-side-panel 
+      class="product-side-panel-content"
       :product-status="productStatus" 
       :product-contact="productContact"
-      class="product-side-panel-content"/>
+      @open-product-forms="openProductForms"/>
   </div>
 </template>
 
@@ -45,6 +48,11 @@ export default {
     productContact() {
       return this.product.contactInfos;
     },
+  },
+  methods: {
+    openProductForms() {
+      this.$emit('open-product-forms')
+    }
   }
 }
 </script>
@@ -55,8 +63,9 @@ export default {
   .product-container {
     min-height: 600px;
     max-width: 1080px;
-    margin: 50px 0;
+    margin-bottom: 50px;
     display: flex;
+    align-items: center;
     flex: 1;
 
     @media (max-width: $tablet-breakpoint) {
@@ -68,7 +77,7 @@ export default {
       flex: 3;
 
       @media (min-width: $tablet-breakpoint) {
-        margin-right: $spacing-lg;
+        margin-right: 30px;
       }
     }
 

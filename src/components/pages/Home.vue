@@ -1,7 +1,7 @@
 <template>
   <div class="home">
-    <Product-container :product="product"/>
-    <Product-investment-forms />
+    <Product-container :product="product" @open-product-forms="openProductForms"/>
+    <Product-investment-forms v-if="isOpenProductForm" @close-product-forms="closeProductForms"/>
   </div>
 </template>
 
@@ -20,8 +20,17 @@ export default {
   data() {
     return {
       product: productMock,
+      isOpenProductForm: false,
     };
   },
+  methods: {
+    openProductForms() {
+      this.isOpenProductForm = true;
+    },
+    closeProductForms() {
+      this.isOpenProductForm = false;
+    },
+  }
 }
 </script>
 
@@ -31,5 +40,6 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin: 50px 0;
   }
 </style>
