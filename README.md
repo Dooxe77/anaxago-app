@@ -1,3 +1,5 @@
+Appli dispo en test sur: <a href="https://anaxago-app.vercel.app/">https://anaxago-app.vercel.app/</a>
+
 # Explication
 
 Anaxago test:
@@ -35,6 +37,3 @@ npm run serve
 #Lien de test: http://localhost:8080/
 
 ```
-
-Todo:
-clean // TEMP
