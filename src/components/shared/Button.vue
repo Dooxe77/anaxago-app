@@ -15,6 +15,9 @@ import { VBtn } from 'vuetify/lib';
 
 export default {
   name: 'Button',
+  components: {
+    VBtn,
+  },
   props: {
     color: {
       type: String,
@@ -33,11 +36,6 @@ export default {
     isDisabled: {
       type: Boolean,
     }
-  },
-  components: {
-    VBtn,
-  },
-  computed: {
   },
   methods: {
     onClickButton() {

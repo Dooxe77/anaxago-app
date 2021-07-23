@@ -1,17 +1,20 @@
 <template>
   <div class="payment-method-step">
-    <v-select 
+    <Select 
       label="Moyen de paiement" 
       :items="paymentMethods" 
-      @input="updateSelectedPaymentMethod" />
+      @select="updateSelectedPaymentMethod" />
   </div>
 </template>
 
 <script>
-import { VSelect } from "vuetify/lib";
+import Select  from "../../shared/Select";
 
 export default {
   name: 'PaymentMethodStep',
+  components: {
+    Select,
+  },
   data () {
     return {
       paymentMethods: [
@@ -20,9 +23,6 @@ export default {
         "Virement"
       ],
     }
-  },
-  components: {
-    VSelect,
   },
   methods: {
     updateSelectedPaymentMethod(value) {
@@ -33,6 +33,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../../../styles/variables.scss";
 
 </style>

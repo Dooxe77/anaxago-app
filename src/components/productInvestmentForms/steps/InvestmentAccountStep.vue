@@ -7,19 +7,20 @@
 <script>
 export default {
   name: 'InvestmentAccountStep',
+  components: {
+    
+  },
   data () {
     return {
 
-}
-  },
-  components: {
+    }
   },
   computed: {
     
   },
   methods: {
 
-}
+  }
 }
 </script>
 

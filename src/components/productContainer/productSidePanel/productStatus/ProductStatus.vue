@@ -17,14 +17,14 @@ import ProgressCircular from '../../../shared/ProgressCircular';
 
 export default {
   name: 'ProductStatus',
+  components: {
+    ProgressCircular,
+  },
   props: {
     productStatus: {
       type: Object,
       required: true,
     }
-  },
-  components: {
-    ProgressCircular,
   },
   computed: {
     targetAmount() {
@@ -55,7 +55,6 @@ export default {
 
 <style lang="scss">
 @import "../../../../styles/variables.scss";
-@import "~vuetify/src/styles/settings/variables";
 
   .product-status {
     margin: $spacing-md;

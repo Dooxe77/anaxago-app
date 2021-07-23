@@ -107,17 +107,6 @@ import TextInput from '../shared/TextInput';
 
 export default {
   name: 'ProductInvestmentForms',
-  data () {
-    return {
-      currentStep: 1,
-      amount: "",
-      paymentMethod: "",
-      showToast: false,
-      showProcessToast: false,
-      showValidationInput: false,
-      phoneMessageCode: "543-380",
-    }
-  },
   components: {
     Button,
     AmountInvestmentStep,
@@ -129,6 +118,18 @@ export default {
     VStepperContent, 
     VStepper, 
     VStepperStep,
+  },
+  data () {
+    return {
+      currentStep: 1,
+      amount: "",
+      paymentMethod: "",
+      showToast: false,
+      showProcessToast: false,
+      showValidationInput: false,
+      // Simulate auto complete on phone device .. (PWA) ? :)
+      phoneMessageCode: "543-380",
+    }
   },
   computed: {
     isValidFirstStep() {

@@ -30,14 +30,14 @@ import Avatar from "../../../shared/Avatar";
 
 export default {
   name: 'ContactInfos',
+  components: {
+    Avatar,
+  },
   props: {
      productContact: {
       type: Object,
       required: true,
     }
-  },
-  components: {
-    Avatar,
   },
 }
 </script>

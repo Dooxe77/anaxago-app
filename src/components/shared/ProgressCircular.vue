@@ -13,14 +13,14 @@
 import { VProgressCircular } from 'vuetify/lib';
 export default {
   name: 'ProgressCircular',
+  components: {
+    VProgressCircular,
+  },
   props: {
     value: {
       type: String,
       required: true,
     }
-  },
-  components: {
-    VProgressCircular,
   },
   computed: {
     displayedValue() {

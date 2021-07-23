@@ -9,6 +9,9 @@ import { VAvatar } from 'vuetify/lib';
 
 export default {
   name: 'Avatar',
+  components: {
+    VAvatar,
+  },
   props: {
     color: {
       type: String,
@@ -19,10 +22,6 @@ export default {
       default: 50,
     }
   },
-  components: {
-    VAvatar,
-  },
-  
 }
 </script>
 

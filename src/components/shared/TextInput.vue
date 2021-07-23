@@ -12,6 +12,9 @@ import { VTextField } from 'vuetify/lib';
 
 export default {
   name: 'TextInput',
+  components: {
+    VTextField,
+  },
   props: {
     label: {
       type: String,
@@ -26,9 +29,6 @@ export default {
     rules: {
       type: Array,
     }
-  },
-  components: {
-    VTextField,
   },
   methods: {
     changeInputValue(value) {

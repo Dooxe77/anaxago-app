@@ -22,6 +22,9 @@ import Button from '../../shared/Button';
 
 export default {
   name: 'StepFormButtons',
+  components: {
+    Button,
+  },
   props: {
     isDisabledValidateButton: { 
       type: Boolean, 
@@ -31,9 +34,6 @@ export default {
     return {
       currentStep: 1,
     }
-  },
-  components: {
-    Button,
   },
   methods: {
     onClickValidateButton() {

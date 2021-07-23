@@ -15,6 +15,9 @@ import TextInput from '../../shared/TextInput';
 
 export default {
   name: 'AmountInvestmentStep',
+  components: {
+    TextInput,
+  },
   props: {
     amount: {
       type: String,
@@ -27,12 +30,6 @@ export default {
         minimum: value => value >= 1000 || 'Minimum 1000€',
       }
     }
-  },
-  components: {
-    TextInput,
-  },
-  computed: {
-    
   },
   methods: {
     updateAmount(value) {
