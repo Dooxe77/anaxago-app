@@ -27,6 +27,9 @@ Questions :
 ## Mise en route du projet
 
 ```bash
+# Récupérer le repository
+git clone https://github.com/Dooxe77/anaxago-app.git
+
 # Placez vous dans le dossier anaxago-test
 cd anaxago/
 
