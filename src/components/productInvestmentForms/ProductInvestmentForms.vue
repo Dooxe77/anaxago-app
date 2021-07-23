@@ -13,7 +13,7 @@
       <v-stepper-content step="1">
         <Amount-investment-step :amout="amount" @update-amount="updateAmount"/>
         <Step-form-buttons 
-          :is-disabled-validate-button="isDisabledValidateButtonAmountStep"
+          :is-disabled-validate-button="!isValidFirstStep"
           @validate="changeCurrentStep(2)" 
           @cancel="closeForm" />
       </v-stepper-content>
@@ -25,8 +25,20 @@
         Compte d'investissement
       </v-stepper-step>
       <v-stepper-content step="2">
-        <Investment-account-step />
-        <Step-form-buttons @validate="changeCurrentStep(3)" @cancel="closeForm" />
+        <Investment-account-step 
+          :investment-type="investmentType"
+          :physical-person-infos="physicalPersonInfos"
+          :moral-person-infos="moralPersonInfos"
+          @select-investment="selectInvestment"
+          @update-first-name="updatePhysicalPersonInfo('firstName', $event)"
+          @update-last-name="updatePhysicalPersonInfo('lastName', $event)"
+          @update-siret="updateMoralPersonInfo('siret', $event)"
+          @update-social-reason="updateMoralPersonInfo('socialReason', $event)"
+        />
+        <Step-form-buttons 
+          :is-disabled-validate-button="!isValidSecondStep"
+          @validate="changeCurrentStep(3)" 
+          @cancel="closeForm" />
       </v-stepper-content>
   
       <v-stepper-step 
@@ -43,7 +55,7 @@
           @cancel="closeForm" />
       </v-stepper-content>
 
-      <v-stepper-step :editable="isValidFirstStep && isValidSecondStep" step="4">
+      <v-stepper-step :editable="isValidFirstStep && isValidSecondStep && isValidThirdStep" step="4">
         Validation finale
       </v-stepper-step>
       <v-stepper-content step="4">
@@ -124,6 +136,20 @@ export default {
       currentStep: 1,
       amount: "",
       paymentMethod: "",
+      investmentType: "",
+      investmentAccountInfos: {
+        physicalPerson: {
+          firstName: '',
+          lastName: '',
+        },
+        moralPerson: {
+          siret: '',
+          socialReason: '',
+        },
+        pea: {
+          // TODO PEA ?
+        }
+      },
       showToast: false,
       showProcessToast: false,
       showValidationInput: false,
@@ -133,25 +159,52 @@ export default {
   },
   computed: {
     isValidFirstStep() {
-      return false;
+      const parsedAmount = parseInt(this.amount);
+      return isNaN(parsedAmount) ? false : parsedAmount >= 1000;
     },
     isValidSecondStep() {
-      return false;
+      // TODO PEA
+      return !!(this.physicalPersonFormIsValid || this.moralPersonFormIsValid);
     },
     isValidThirdStep() {
       return false;
     },
-    isDisabledValidateButtonAmountStep() {
-      const parsedAmount = parseInt(this.amount);
-      return isNaN(parsedAmount) ? true : parsedAmount < 1000;
+    physicalPersonFormIsValid(){
+      return this.physicalPersonInfos.firstName && this.physicalPersonInfos.lastName;
+    },
+    moralPersonFormIsValid(){
+      return this.moralPersonInfos.siret && this.moralPersonInfos.socialReason;
     },
     isDisabledValidateButtonPaymentMethodStep() {
       return !this.paymentMethod;
+    },
+    physicalPersonInfos() {
+      return this.investmentAccountInfos.physicalPerson;
+    },
+    moralPersonInfos() {
+      return this.investmentAccountInfos.moralPerson;
+    },
+    peaInfos() {
+      return this.investmentAccountInfos.pea;
+    },
+    investmentTypeInfos() {
+      if (this.investmentType === 'Personne physique') {
+        return this.physicalPersonInfos;
+      } else if (this.investmentType === 'Personne morale') {
+        return this.moralPersonInfos;
+      } else if (this.investmentType === 'PEA') {
+        return this.peaInfos;
+      }
+      return null;
     },
     investmentData() {
       return {
         amount: this.amount,
         paymentMethod: this.paymentMethod,
+        investmentType: {
+          type: this.investmentType,
+          infos: this.investmentTypeInfos,
+        },
       }
     },
   },
@@ -162,21 +215,20 @@ export default {
     closeForm() {
       this.$emit('close-product-forms');
     },
-    finishProcess() {
-      setTimeout(() => { 
-        this.showToast = true;
-        this.showValidationInput = true;
-      }, 1000);
-
-      setTimeout(() => { 
-        this.showToast = false;
-      }, 10000);
-    },
     updateAmount(value) {
       this.amount = value;
     },
     updateSelectedPaymentMethod(value) {
       this.paymentMethod = value;
+    },
+    selectInvestment(investmentType) {
+      this.investmentType = investmentType;
+    },
+    updatePhysicalPersonInfo(key, value) {
+      this.investmentAccountInfos.physicalPerson[key] = value;
+    },
+    updateMoralPersonInfo(key, value) {
+      this.investmentAccountInfos.moralPerson[key] = value;
     },
     validateInvestment() {
       setTimeout(() => { 
@@ -185,6 +237,16 @@ export default {
 
       setTimeout(() => { 
         this.showProcessToast = false;
+      }, 10000);
+    },
+    finishProcess() {
+      setTimeout(() => { 
+        this.showToast = true;
+        this.showValidationInput = true;
+      }, 1000);
+
+      setTimeout(() => { 
+        this.showToast = false;
       }, 10000);
     },
   }
